@@ -138,3 +138,36 @@ hr {
     opacity: 0;
     pointer-events: none;
 }
+
+/* added for password strength indication */
+.strength-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.strength-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.strength-bar-bg {
+    background: #111827;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#strength-bar-fill {
+    height: 100%;
+    width: 0%; /* Initial width */
+    border-radius: 4px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+/* Combined ID and Class for higher specificity */
+#strength-bar-fill.weak { background-color: #EF4444; width: 25%; }
+#strength-bar-fill.fair { background-color: #F59E0B; width: 50%; }
+#strength-bar-fill.good { background-color: #3B82F6; width: 75%; }
+#strength-bar-fill.strong { background-color: #10B981; width: 100%; }

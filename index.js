@@ -4,6 +4,8 @@ const pwTwo = document.getElementById("pw-2");
 const lengthInput = document.getElementById("length-input");
 const charPoolInput = document.getElementById("char-pool");
 const toast = document.getElementById("copy-toast");
+const strengthBar = document.getElementById("strength-bar-fill");
+const strengthText = document.getElementById("strength-text");
 
 // Function to generate a single password
 function generatePassword(){
@@ -26,6 +28,7 @@ function generatePassword(){
 generateBtn.addEventListener("click", () => {
     pwOne.textContent = generatePassword();
     pwTwo.textContent = generatePassword();
+    updateStrengthUI();
 });
 
 // Function to copy to clipboard with feedback
@@ -52,3 +55,53 @@ function showToast() {
 // Add click event Listeners to the password boxes
 pwOne.addEventListener("click", () => copyToClipboard(pwOne));
 pwTwo.addEventListener("click", () => copyToClipboard(pwTwo));
+
+/* added for password strength indication */
+function updateStrengthUI(){
+    const length = parseInt(lengthInput.value);
+    const pool = charPoolInput.value;
+
+    let score = 0;
+
+    // 1. Length Logic
+    if(length > 8) score++;
+    if(length > 12) score++;
+    if(length > 16) score++;
+
+    // 2. Variety Logic
+    const hasNumbers = /\d/.test(pool);
+    const hasSpecial = /[^A-Za-z0-9]/.test(pool);
+    const hasLower = /[a-z]/.test(pool);
+    const hasUpper = /[A-Z]/.test(pool);
+    // Detect emojis or non-standard characters
+    const hasAdvanced = Array.from(pool).some(char => char.charCodeAt(0) > 127);
+
+    if(hasNumbers && hasSpecial) score++;
+    if(hasLower && hasUpper) score++;
+    if(hasAdvanced) score++;
+    
+    // 3. UI Update Logic
+    strengthBar.classList.remove("weak", "fair", "good", "strong"); // Reset classes
+
+    if (score <= 2) {
+        strengthBar.classList.add("weak");
+        strengthText.textContent = "Weak";
+        strengthText.style.color = "#EF4444";
+    } else if (score <= 4) {
+        strengthBar.classList.add("fair");
+        strengthText.textContent = "Fair";
+        strengthText.style.color = "#F59E0B";
+    } else if (score === 5) {
+        strengthBar.classList.add("good");
+        strengthText.textContent = "Good";
+        strengthText.style.color = "#3B82F6";
+    } else {
+        strengthBar.classList.add("strong");
+        strengthText.textContent = "Strong / Secure";
+        strengthText.style.color = "#10B981";
+    }
+}
+
+// update the strength when user changes settings manually
+lengthInput.addEventListener("input", updateStrengthUI);
+charPoolInput.addEventListener("input", updateStrengthUI);
