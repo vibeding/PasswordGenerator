@@ -6,6 +6,8 @@ Dual Generation: Generates two unique passwords simultaneously so you can choose
 
 Advanced Customization: Modify the character pool directly. Add specific symbols, remove confusing characters (like O and 0), or include emojis for high-entropy passwords.
 
+Strength Meter: Real-time analysis of your settings. The bar changes color (Red → Yellow → Blue → Green) based on length and character diversity.
+
 Click-to-Copy: One-tap copying to your clipboard using the modern Clipboard API.
 
 Toast Notifications: Immediate visual confirmation when a password has been successfully copied.
@@ -33,3 +35,6 @@ Length: Incremental points for lengths > 8, 12, and 16.
 Diversity: Checks for the presence of numbers, symbols, uppercase, and lowercase letters.
 
 Entropy Bonus: Extra points awarded for using non-standard ASCII characters (emojis/special glyphs).
+
+🔗 Link
+https://password-generator-vd.netlify.app/
