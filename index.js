@@ -70,7 +70,7 @@ function updateStrengthUI(){
 
     // 2. Variety Logic
     const hasNumbers = /\d/.test(pool);
-    const hasSpecial = /[~`@#$%^&*()_\-+={[\]]\|\\:;"'<,>.?\/]/.test(pool);
+    const hasSpecial = /[^A-Za-z0-9]/.test(pool);
     const hasLower = /[a-z]/.test(pool);
     const hasUpper = /[A-Z]/.test(pool);
     // Detect emojis or non-standard characters
@@ -79,9 +79,9 @@ function updateStrengthUI(){
     if(hasNumbers && hasSpecial) score++;
     if(hasLower && hasUpper) score++;
     if(hasAdvanced) score++;
-
+    
     // 3. UI Update Logic
-    strengthBar.className = ""; // Reset classes
+    strengthBar.classList.remove("weak", "fair", "good", "strong"); // Reset classes
 
     if (score <= 2) {
         strengthBar.classList.add("weak");

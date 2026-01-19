@@ -162,11 +162,12 @@ hr {
 #strength-bar-fill {
     height: 100%;
     width: 0%; /* Initial width */
+    border-radius: 4px;
     transition: width 0.4s ease, background-color 0.4s ease;
 }
 
-/* Strength Colors */
-.weak { background-color: #EF4444; width: 25%; }
-.fair { background-color: #F59E0B; width: 50%; }
-.good { background-color: #3B82F6; width: 75%; }
-.strong { background-color: #10B981; width: 100%; }
+/* Combined ID and Class for higher specificity */
+#strength-bar-fill.weak { background-color: #EF4444; width: 25%; }
+#strength-bar-fill.fair { background-color: #F59E0B; width: 50%; }
+#strength-bar-fill.good { background-color: #3B82F6; width: 75%; }
+#strength-bar-fill.strong { background-color: #10B981; width: 100%; }
